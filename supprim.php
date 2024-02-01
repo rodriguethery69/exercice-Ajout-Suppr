@@ -14,24 +14,28 @@ try {
 // Vérifier si les données du formulaire ont été soumises
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Vérifier si la clé 'id' est définie dans le formulaire
-    if (isset($_POST['id'])) {
+    if (isset($_POST['nom'])) {
         // Capturer l'ID du jeu à supprimer
-        $id_joueur = $_POST['id'];
+        $nom_joueur = $_POST['nom'];
 
         // Requête SQL de suppression avec une requête préparée
-        $delete_query = "DELETE FROM jeux_video WHERE id = ?";
+        $delete_query = "DELETE FROM jeux_video WHERE nom = ?";
         
         // Préparer la requête
         $stmt = $dbco->prepare($delete_query);
         
         // Exécuter la requête avec l'ID du jeu à supprimer
-        $stmt->execute([$id_joueur]);
+        $stmt->execute([$nom_joueur]);
 
         echo "Le jeu a été supprimé avec succès.";
     } else {
         echo "L'ID du jeu à supprimer n'est pas spécifié.";
+
+        
     }
+    header('Location: liste_jeux.php');
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -47,8 +51,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h2>Supprimer un jeu</h2>
     <form class="row g-3" method="POST">
         <div class="col-md-4">
-            <label for="validationDefault07" class="form-label">ID du jeu à supprimer</label>
-            <input type="text" class="form-control" id="validationDefault07" name="id" required>
+            <label for="validationDefault07" class="form-label">Nom du jeu à supprimer</label>
+            <input type="text" class="form-control" id="validationDefault07" name="nom" required>
         </div>
         <div class="col-12">
             <button class="btn btn-danger" type="submit">Supprimer le jeu</button>
@@ -56,3 +60,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 </body>
 </html>
+
+

@@ -6,8 +6,8 @@ function findJeuxByID($dbco, $currentId) {
         $requete = $dbco->query($sql);
     
         // Récupère la première image associée au film
-        $jeux = $requete->fetch();
+        $jeu = $requete->fetch();
     
        
-        return $jeux;
+        return $jeu;
     }
